@@ -14,7 +14,7 @@
     var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script") 
     ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)}; 
      
-      ttq.load('D75ELRBC77UCBSL4QM20'); 
+      ttq.load('D75F5OJC77UBIUFTU720'); 
       ttq.page(); 
     }(window, document, 'ttq'); 
     </script> 
@@ -161,8 +161,8 @@
                     
                     <div class="flex items-center gap-4">
                             <span id="mainPrice" class="text-3xl font-black text-gray-900">130.00 ر.س</span>
-                            <span class="text-gray-400 line-through text-lg">200.00 ر.س</span>
-                            <span class="bg-red-600 text-white text-xs px-2 py-1 rounded-md font-bold">خصم 35%</span>
+                            <span id="originalPrice" class="text-gray-400 line-through text-lg">200.00 ر.س</span>
+                            <span id="discountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded-md font-bold">خصم 35%</span>
                         </div>
                     <p class="text-gray-500 text-sm">شامل الضريبة</p>
 
@@ -197,7 +197,7 @@
                             <input type="text" id="quantityInput" value="1" readonly class="w-14 text-center font-black text-xl outline-none">
                             <button onclick="updateQuantity(1)" class="p-2 hover:bg-gray-50 text-gray-500 transition"><i data-lucide="plus" class="w-5 h-5"></i></button>
                         </div>
-                        <button class="flex-1 bg-white border-2 border-black text-black h-14 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-50 transition shadow-sm">
+                        <button onclick="addToCart()" class="flex-1 bg-white border-2 border-black text-black h-14 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-gray-50 transition shadow-sm">
                             <i data-lucide="shopping-cart" class="w-5 h-5"></i>
                             أضف للسلة
                         </button>
@@ -261,14 +261,14 @@
                             <div id="offer2" onclick="selectOffer(2, 220)" class="offer-card border border-gray-200 bg-white rounded-xl p-4 cursor-pointer hover:border-blue-400 transition">
                                 <div class="flex justify-between items-start">
                                     <div>
-                                        <p class="font-bold">اشتري 2 قطع بدل واحدة و وفر 50%</p>
-                                        <p class="text-xs text-gray-400">اشتري 2 قطع بدل واحدة و وفر 45%</p>
+                                        <p class="font-bold">اشتري قطعتين أو أكثر ووفر 45%</p>
+                                        <p class="text-xs text-gray-400">سعر الوحدة 110 ريال فقط</p>
                                     </div>
-                                    <div class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 45%</div>
+                                    <div id="bulkDiscountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 45%</div>
                                 </div>
                                 <div class="flex justify-between items-end mt-4">
-                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">200</span> <span class="text-gray-900 font-bold">110 ر.س</span></p>
-                                    <p class="font-bold text-lg">الإجمالي: 220 ر.س</p>
+                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">200</span> <span class="text-gray-900 font-bold">110.00 ر.س</span></p>
+                                    <p id="bulkOfferTotal" class="font-bold text-lg">الإجمالي: 220.00 ر.س</p>
                                 </div>
                             </div>
                         </div>
@@ -587,13 +587,35 @@
             
             // Auto-select offer and calculate price
             if (currentQuantity >= 2) {
+                // Force selectOffer with 2 for multi-quantity logic
                 selectOffer(2, currentQuantity * bulkPriceUnit);
             } else {
                 selectOffer(1, pricePerUnit);
             }
         }
 
+        function addToCart() {
+            const val = currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit);
+            console.log('TikTok Event: AddToCart', val);
+            if (typeof ttq !== 'undefined') {
+                ttq.track('AddToCart', {
+                    contents: [{
+                        content_id: 'smart-hotel-lamp',
+                        content_name: 'Smart Hotel Lamp',
+                        quantity: currentQuantity,
+                        price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit
+                    }],
+                    value: val,
+                    currency: 'SAR'
+                });
+            }
+            // Direct scroll to checkout form after adding to cart
+            document.getElementById('checkoutSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
         function scrollToCheckout() {
+            const val = currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit);
+            console.log('TikTok Event: InitiateCheckout', val);
             // Track TikTok Event: InitiateCheckout
             if (typeof ttq !== 'undefined') {
                 ttq.track('InitiateCheckout', {
@@ -603,7 +625,7 @@
                         quantity: currentQuantity,
                         price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit
                     }],
-                    value: currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit),
+                    value: val,
                     currency: 'SAR'
                 });
             }
@@ -619,10 +641,12 @@
             });
 
             const selectedCard = document.getElementById('offer' + offerId);
-            selectedCard.classList.remove('border-gray-200', 'bg-white', 'border');
-            selectedCard.classList.add('border-blue-400', 'bg-blue-50', 'border-2');
+            if (selectedCard) {
+                selectedCard.classList.remove('border-gray-200', 'bg-white', 'border');
+                selectedCard.classList.add('border-blue-400', 'bg-blue-50', 'border-2');
+            }
 
-            // Logic for clicking directly on offer cards
+            // If user explicitly clicks on offer 2 but quantity is 1, set it to 2
             if (offerId === 2 && currentQuantity < 2) {
                 currentQuantity = 2;
                 document.getElementById('quantityInput').value = currentQuantity;
@@ -633,20 +657,38 @@
                 document.getElementById('formQuantity').value = currentQuantity;
             }
 
-            // Calculate total price based on unit price
-            const finalPrice = currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit);
+            // RE-CALCULATE PRICE based on the logic: if quantity > 1, all are 110
+            const finalPrice = currentQuantity >= 2 ? (currentQuantity * 110) : 130;
+            const finalOriginalPrice = currentQuantity * 200;
             
-            // Update Totals
-            const priceStr = finalPrice + ' ر.س';
+            // Update Totals everywhere
+            const priceStr = finalPrice.toFixed(2) + ' ر.س';
+            const originalPriceStr = finalOriginalPrice.toFixed(2) + ' ر.س';
+            
             document.getElementById('summaryTotal').innerText = priceStr;
-            document.getElementById('buttonTotal').innerText = '(' + finalPrice.toFixed(2) + ' ر.س)';
+            document.getElementById('buttonTotal').innerText = '(' + priceStr + ')';
             
             // Update hidden form field for total
             document.getElementById('formTotal').value = priceStr;
             
-            // Update main product price at top
+            // Update the bulk offer card total dynamically in the offer section
+            const bulkOfferTotal = document.getElementById('bulkOfferTotal');
+            if (bulkOfferTotal) {
+                const displayBulkTotal = (currentQuantity >= 2 ? (currentQuantity * 110) : 220).toFixed(2);
+                bulkOfferTotal.innerText = 'الإجمالي: ' + displayBulkTotal + ' ر.س';
+            }
+            
+            // Update main product price at top (Show Total Price)
             const mainPrice = document.getElementById('mainPrice');
             if (mainPrice) mainPrice.innerText = priceStr;
+
+            // Update original price and discount badge at top
+            const originalPriceEl = document.getElementById('originalPrice');
+            const discountBadgeEl = document.getElementById('discountBadge');
+            if (originalPriceEl && discountBadgeEl) {
+                originalPriceEl.innerText = originalPriceStr;
+                discountBadgeEl.innerText = currentQuantity >= 2 ? 'خصم 45%' : 'خصم 35%';
+            }
             
             // Update bottom sticky bar total
             const stickyTotal = document.querySelector('.fixed.bottom-0 .gold-text');
@@ -684,6 +726,8 @@
         }
 
         function showSuccess() {
+            const val = currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit);
+            console.log('TikTok Event: CompletePayment', val);
             // Track TikTok Event: CompletePayment
             if (typeof ttq !== 'undefined') {
                 ttq.track('CompletePayment', {
@@ -693,7 +737,7 @@
                         quantity: currentQuantity,
                         price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit
                     }],
-                    value: currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit),
+                    value: val,
                     currency: 'SAR'
                 });
             }
@@ -719,6 +763,20 @@
             formElement: '#orderForm', 
             formId: 'meepgnnv',
             onSubmit: () => {
+                const val = currentQuantity >= 2 ? (currentQuantity * bulkPriceUnit) : (currentQuantity * pricePerUnit);
+                console.log('TikTok Event: PlaceAnOrder (Button Click)', val);
+                if (typeof ttq !== 'undefined') {
+                    ttq.track('PlaceAnOrder', {
+                        contents: [{
+                            content_id: 'smart-hotel-lamp',
+                            content_name: 'Smart Hotel Lamp',
+                            quantity: currentQuantity,
+                            price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit
+                        }],
+                        value: val,
+                        currency: 'SAR'
+                    });
+                }
                 showLoading();
                 return true; // Ensure the library continues
             },
