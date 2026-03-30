@@ -530,15 +530,15 @@
                              id="mainImage"
                              class="w-full rounded-2xl shadow-lg aspect-square object-cover">
                         <div class="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition">
-                            <button class="bg-white/80 p-2 rounded-full shadow-md hover:bg-white"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
-                            <button class="bg-white/80 p-2 rounded-full shadow-md hover:bg-white"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                            <button onclick="prevImage()" class="bg-white/80 p-2 rounded-full shadow-md hover:bg-white"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+                            <button onclick="nextImage()" class="bg-white/80 p-2 rounded-full shadow-md hover:bg-white"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-4 gap-2">
-                        <img src="product3.webp" onclick="changeImage(this.src)" class="rounded-lg border-2 border-black cursor-pointer aspect-square object-cover">
-                        <img src="product.jpg" onclick="changeImage(this.src)" class="rounded-lg border border-gray-200 cursor-pointer hover:border-black aspect-square object-cover">
-                        <img src="product1.png" onclick="changeImage(this.src)" class="rounded-lg border border-gray-200 cursor-pointer hover:border-black aspect-square object-cover">
-                        <img src="product2.jpg" onclick="changeImage(this.src)" class="rounded-lg border border-gray-200 cursor-pointer hover:border-black aspect-square object-cover">
+                    <div class="grid grid-cols-4 gap-2" id="thumbnailGrid">
+                        <img src="product3.webp" onclick="changeImage(this)" class="rounded-lg border-2 border-black cursor-pointer aspect-square object-cover">
+                        <img src="product.jpg" onclick="changeImage(this)" class="rounded-lg border border-gray-200 cursor-pointer hover:border-black aspect-square object-cover">
+                        <img src="product1.png" onclick="changeImage(this)" class="rounded-lg border border-gray-200 cursor-pointer hover:border-black aspect-square object-cover">
+                        <img src="product2.jpg" onclick="changeImage(this)" class="rounded-lg border border-gray-200 cursor-pointer hover:border-black aspect-square object-cover">
                     </div>
                 </div>
             </div>
@@ -695,16 +695,52 @@
             if (stickyTotal) stickyTotal.innerText = priceStr;
         }
         
-        function changeImage(src) {
+        let currentImageIndex = 0;
+        const images = ["product3.webp", "product.jpg", "product1.png", "product2.jpg"];
+
+        function changeImage(element) {
+            const src = element.getAttribute('src');
             document.getElementById('mainImage').src = src;
+            
+            // Update current index
+            currentImageIndex = images.findIndex(img => src.includes(img));
+
             // Update active thumbnail border
-            const thumbs = document.querySelectorAll('.grid img');
+            const thumbs = document.querySelectorAll('#thumbnailGrid img');
             thumbs.forEach(img => {
                 img.classList.remove('border-black', 'border-2');
                 img.classList.add('border', 'border-gray-200');
             });
-            event.target.classList.remove('border-gray-200', 'border');
-            event.target.classList.add('border-black', 'border-2');
+            element.classList.remove('border-gray-200', 'border');
+            element.classList.add('border-black', 'border-2');
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            updateGallery();
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            updateGallery();
+        }
+
+        function updateGallery() {
+            const mainImage = document.getElementById('mainImage');
+            const thumbs = document.querySelectorAll('#thumbnailGrid img');
+            const newSrc = images[currentImageIndex];
+            
+            mainImage.src = newSrc;
+            
+            thumbs.forEach((img, index) => {
+                if (index === currentImageIndex) {
+                    img.classList.remove('border-gray-200', 'border');
+                    img.classList.add('border-black', 'border-2');
+                } else {
+                    img.classList.remove('border-black', 'border-2');
+                    img.classList.add('border', 'border-gray-200');
+                }
+            });
         }
 
         // Simple marquee effect for top bar
