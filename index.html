@@ -128,9 +128,9 @@
         <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-6">
                 <div class="flex space-x-2 space-x-reverse">
-                    <div class="bg-black text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold shadow-lg">24</div>
-                    <div class="bg-black text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold shadow-lg">49</div>
-                    <div class="bg-black text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold shadow-lg">01</div>
+                    <div id="header-hours" class="bg-black text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold shadow-lg">24</div>
+                    <div id="header-minutes" class="bg-black text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold shadow-lg">49</div>
+                    <div id="header-seconds" class="bg-black text-white w-12 h-12 flex items-center justify-center rounded-lg font-bold shadow-lg">01</div>
                 </div>
             </div>
             <div class="text-center md:text-right">
@@ -160,9 +160,9 @@
                     </h1>
                     
                     <div class="flex items-center gap-4">
-                            <span id="mainPrice" class="text-3xl font-black text-gray-900">135.00 ر.س</span>
-                            <span id="originalPrice" class="text-gray-400 line-through text-lg">200.00 ر.س</span>
-                            <span id="discountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded-md font-bold">خصم 32%</span>
+                            <span id="mainPrice" class="text-3xl font-black text-gray-900">155.00 ر.س</span>
+                            <span id="originalPrice" class="text-gray-400 line-through text-lg">250.00 ر.س</span>
+                            <span id="discountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded-md font-bold">خصم 38%</span>
                         </div>
                     <p class="text-gray-500 text-sm">شامل الضريبة</p>
 
@@ -227,9 +227,9 @@
                     <!-- Timer Section -->
                     <div class="bg-red-50 border border-red-200 rounded-lg p-4 flex items-center justify-between mt-6">
                         <div class="flex gap-2">
-                            <div class="bg-white border border-red-200 text-red-600 w-8 h-8 flex items-center justify-center rounded font-bold">02</div>
-                            <div class="bg-white border border-red-200 text-red-600 w-8 h-8 flex items-center justify-center rounded font-bold">41</div>
-                            <div class="bg-white border border-red-200 text-red-600 w-8 h-8 flex items-center justify-center rounded font-bold">01</div>
+                            <div id="timer-hours" class="bg-white border border-red-200 text-red-600 w-8 h-8 flex items-center justify-center rounded font-bold">02</div>
+                            <div id="timer-minutes" class="bg-white border border-red-200 text-red-600 w-8 h-8 flex items-center justify-center rounded font-bold">41</div>
+                            <div id="timer-seconds" class="bg-white border border-red-200 text-red-600 w-8 h-8 flex items-center justify-center rounded font-bold">01</div>
                         </div>
                         <div class="flex items-center text-red-600 font-bold">
                             ينتهي التخفيض خلال
@@ -245,30 +245,30 @@
                         </div>
                         <div class="space-y-4">
                             <!-- Offer 1 -->
-                            <div id="offer1" onclick="selectOffer(1, 135)" class="offer-card border-2 border-blue-400 bg-blue-50 rounded-xl p-4 relative cursor-pointer">
+                            <div id="offer1" onclick="selectOffer(1, 155)" class="offer-card border-2 border-blue-400 bg-blue-50 rounded-xl p-4 relative cursor-pointer">
                                 <div class="flex justify-between items-start">
                                     <div class="text-left">
                                         <p class="font-bold">Buy 1</p>
                                     </div>
-                                    <div class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 32%</div>
+                                    <div class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 38%</div>
                                 </div>
                                 <div class="flex justify-between items-end mt-4">
-                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">200</span> <span class="text-gray-900 font-bold">135 ر.س</span></p>
-                                    <p class="font-bold text-lg">الإجمالي: 135 ر.س</p>
+                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">250</span> <span class="text-gray-900 font-bold">155 ر.س</span></p>
+                                    <p class="font-bold text-lg">الإجمالي: 155 ر.س</p>
                                 </div>
                             </div>
                             <!-- Offer 2 -->
-                            <div id="offer2" onclick="selectOffer(2, 230)" class="offer-card border border-gray-200 bg-white rounded-xl p-4 cursor-pointer hover:border-blue-400 transition">
+                            <div id="offer2" onclick="selectOffer(2, 250)" class="offer-card border border-gray-200 bg-white rounded-xl p-4 cursor-pointer hover:border-blue-400 transition">
                                 <div class="flex justify-between items-start">
                                     <div>
-                                        <p class="font-bold">اشتري قطعتين أو أكثر ووفر 42%</p>
-                                        <p class="text-xs text-gray-400">سعر الوحدة 115 ريال فقط</p>
+                                        <p class="font-bold">اشتري قطعتين أو أكثر ووفر 50%</p>
+                                        <p class="text-xs text-gray-400">سعر الوحدة 125 ريال فقط</p>
                                     </div>
-                                    <div id="bulkDiscountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 42%</div>
+                                    <div id="bulkDiscountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 50%</div>
                                 </div>
                                 <div class="flex justify-between items-end mt-4">
-                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">200</span> <span class="text-gray-900 font-bold">115.00 ر.س</span></p>
-                                    <p id="bulkOfferTotal" class="font-bold text-lg">الإجمالي: 230.00 ر.س</p>
+                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">250</span> <span class="text-gray-900 font-bold">125.00 ر.س</span></p>
+                                    <p id="bulkOfferTotal" class="font-bold text-lg">الإجمالي: 250.00 ر.س</p>
                                 </div>
                             </div>
                         </div>
@@ -285,7 +285,7 @@
                     
                     <form id="orderForm" action="https://formspree.io/f/meepgnnv" method="POST">
                         <input type="hidden" id="formQuantity" name="quantity" value="1">
-                        <input type="hidden" id="formTotal" name="total" value="135 ر.س">
+                        <input type="hidden" id="formTotal" name="total" value="155 ر.س">
                         
                         <div id="formFields" class="grid grid-cols-1 gap-5">
                             <div class="space-y-2">
@@ -339,13 +339,13 @@
                                     <span class="text-xl font-black text-black">ملخص الطلب</span>
                                 </div>
                                 <div class="text-right">
-                                    <span id="summaryTotal" class="text-3xl font-black gold-text">135 ر.س</span>
+                                    <span id="summaryTotal" class="text-3xl font-black gold-text">155 ر.س</span>
                                     <p class="text-[10px] text-green-600 font-bold uppercase">شحن مجاني</p>
                                 </div>
                             </div>
                             <button type="submit" id="submitBtn" data-fs-submit-btn class="w-full btn-luxury text-white h-20 rounded-2xl font-black text-2xl flex flex-col items-center justify-center shadow-2xl transition hover:scale-[1.02] active:scale-[0.98]">
                                 <span id="btnText">تأكيد الطلب الآن</span>
-                                <span id="buttonTotal" class="text-xs font-normal opacity-70 tracking-widest">(135.00 ر.س)</span>
+                                <span id="buttonTotal" class="text-xs font-normal opacity-70 tracking-widest">(155.00 ر.س)</span>
                             </button>
                         </div>
 
@@ -522,7 +522,7 @@
     <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t p-4 z-50 flex items-center justify-between md:px-24 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
         <div class="flex flex-col">
             <span class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">Price / السعر</span>
-            <span class="font-black text-xl gold-text">135.00 ر.س</span>
+            <span class="font-black text-xl gold-text">155.00 ر.س</span>
         </div>
         <button onclick="scrollToCheckout()" class="btn-luxury text-white px-10 py-3 rounded-xl font-black text-lg shadow-lg pulse-gold">
             اطلب الآن
@@ -546,8 +546,8 @@
         lucide.createIcons();
 
         let currentQuantity = 1;
-        const pricePerUnit = 135;
-        const bulkPriceUnit = 115; // New unit price for 2+ items
+        const pricePerUnit = 155;
+        const bulkPriceUnit = 125; // New unit price for 2+ items
 
         function updateQuantity(change) {
             currentQuantity += change;
@@ -629,9 +629,9 @@
                 document.getElementById('formQuantity').value = currentQuantity;
             }
 
-            // RE-CALCULATE PRICE based on the logic: if quantity > 1, all are 115
-            const finalPrice = currentQuantity >= 2 ? (currentQuantity * 115) : 135;
-            const finalOriginalPrice = currentQuantity * 200;
+            // RE-CALCULATE PRICE based on the logic: if quantity > 1, all are 125
+            const finalPrice = currentQuantity >= 2 ? (currentQuantity * 125) : 155;
+            const finalOriginalPrice = currentQuantity * 250;
             
             // Update Totals everywhere
             const priceStr = finalPrice.toFixed(2) + ' ر.س';
@@ -646,7 +646,7 @@
             // Update the bulk offer card total dynamically in the offer section
             const bulkOfferTotal = document.getElementById('bulkOfferTotal');
             if (bulkOfferTotal) {
-                const displayBulkTotal = (currentQuantity >= 2 ? (currentQuantity * 115) : 230).toFixed(2);
+                const displayBulkTotal = (currentQuantity >= 2 ? (currentQuantity * 125) : 250).toFixed(2);
                 bulkOfferTotal.innerText = 'الإجمالي: ' + displayBulkTotal + ' ر.س';
             }
             
@@ -659,7 +659,7 @@
             const discountBadgeEl = document.getElementById('discountBadge');
             if (originalPriceEl && discountBadgeEl) {
                 originalPriceEl.innerText = originalPriceStr;
-                discountBadgeEl.innerText = currentQuantity >= 2 ? 'خصم 42%' : 'خصم 32%';
+                discountBadgeEl.innerText = currentQuantity >= 2 ? 'خصم 50%' : 'خصم 38%';
             }
             
             // Update bottom sticky bar total
@@ -765,6 +765,34 @@
             }, 3000);
         }
 
+        // Timer Logic
+        function startTimer(duration) {
+            let timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                // Update Header Timer
+                if(document.getElementById('header-hours')) document.getElementById('header-hours').textContent = hours;
+                if(document.getElementById('header-minutes')) document.getElementById('header-minutes').textContent = minutes;
+                if(document.getElementById('header-seconds')) document.getElementById('header-seconds').textContent = seconds;
+
+                // Update Section Timer
+                if(document.getElementById('timer-hours')) document.getElementById('timer-hours').textContent = hours;
+                if(document.getElementById('timer-minutes')) document.getElementById('timer-minutes').textContent = minutes;
+                if(document.getElementById('timer-seconds')) document.getElementById('timer-seconds').textContent = seconds;
+
+                if (--timer < 0) {
+                    timer = duration; // Reset timer when it ends
+                }
+            }, 1000);
+        }
+
         // Initialize Formspree AJAX
         window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
         formspree('initForm', { 
@@ -800,6 +828,11 @@
                 alert('عذراً، حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى أو التأكد من تفعيل الفورم في Formspree.');
             }
         });
+
+        // Start timer on load (e.g., 2 hours, 49 minutes, 1 second = 10141 seconds)
+        window.onload = function () {
+            startTimer(10141);
+        };
     </script>
 
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
