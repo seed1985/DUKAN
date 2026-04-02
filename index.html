@@ -20,6 +20,22 @@
     </script> 
     <!-- TikTok Pixel Code End -->
     
+    <!-- Snap Pixel Code --> 
+    <script type='text/javascript'> 
+    (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function() 
+    {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)}; 
+    a.queue=[];var s='script';r=t.createElement(s);r.async=!0; 
+    r.src=n;var u=t.getElementsByTagName(s)[0]; 
+    u.parentNode.insertBefore(r,u);})(window,document, 
+    'https://sc-static.net/scevent.min.js'); 
+    
+    snaptr('init', '5bae3e1e-bda0-40fc-9e62-c3d0263f2ec9', {}); 
+    
+    snaptr('track', 'PAGE_VIEW'); 
+    
+    </script> 
+    <!-- End Snap Pixel Code -->
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
         body { 
@@ -581,6 +597,19 @@
                     currency: 'SAR'
                 });
             }
+            
+            // Snap Pixel AddToCart
+            if (typeof snaptr !== 'undefined') {
+                snaptr('track', 'ADD_CART', {
+                    item_ids: ['smart-hotel-lamp'],
+                    item_name: 'Smart Hotel Lamp',
+                    price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit,
+                    currency: 'SAR',
+                    number_items: currentQuantity,
+                    value: val
+                });
+            }
+
             // Direct scroll to checkout form after adding to cart
             document.getElementById('checkoutSection').scrollIntoView({ behavior: 'smooth' });
         }
@@ -601,6 +630,19 @@
                     currency: 'SAR'
                 });
             }
+
+            // Snap Pixel InitiateCheckout
+            if (typeof snaptr !== 'undefined') {
+                snaptr('track', 'START_CHECKOUT', {
+                    item_ids: ['smart-hotel-lamp'],
+                    item_name: 'Smart Hotel Lamp',
+                    price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit,
+                    currency: 'SAR',
+                    number_items: currentQuantity,
+                    value: val
+                });
+            }
+
             document.getElementById('checkoutSection').scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -750,6 +792,18 @@
                 });
             }
 
+            // Snap Pixel Purchase
+            if (typeof snaptr !== 'undefined') {
+                snaptr('track', 'PURCHASE', {
+                    item_ids: ['smart-hotel-lamp'],
+                    item_name: 'Smart Hotel Lamp',
+                    price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit,
+                    currency: 'SAR',
+                    number_items: currentQuantity,
+                    value: val
+                });
+            }
+
             // Hide form elements
             formFields.classList.add('hidden');
             paymentSection.classList.add('hidden');
@@ -813,6 +867,19 @@
                         currency: 'SAR'
                     });
                 }
+
+                // Snap Pixel PlaceAnOrder
+                if (typeof snaptr !== 'undefined') {
+                    snaptr('track', 'ADD_BILLING', {
+                        item_ids: ['smart-hotel-lamp'],
+                        item_name: 'Smart Hotel Lamp',
+                        price: currentQuantity >= 2 ? bulkPriceUnit : pricePerUnit,
+                        currency: 'SAR',
+                        number_items: currentQuantity,
+                        value: val
+                    });
+                }
+
                 showLoading();
                 return true; // Ensure the library continues
             },
