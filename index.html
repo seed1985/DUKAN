@@ -271,17 +271,17 @@
                                 </div>
                             </div>
                             <!-- Offer 2 -->
-                            <div id="offer2" onclick="selectOffer(2, 250)" class="offer-card border border-gray-200 bg-white rounded-xl p-4 cursor-pointer hover:border-blue-400 transition">
+                            <div id="offer2" onclick="selectOffer(2, 252)" class="offer-card border border-gray-200 bg-white rounded-xl p-4 cursor-pointer hover:border-blue-400 transition">
                                 <div class="flex justify-between items-start">
                                     <div>
                                         <p class="font-bold">اشتري قطعتين أو أكثر ووفر 50%</p>
-                                        <p class="text-xs text-gray-400">سعر الوحدة 125 ريال فقط</p>
+                                        <p class="text-xs text-gray-400">سعر الوحدة 126 ريال فقط</p>
                                     </div>
                                     <div id="bulkDiscountBadge" class="bg-red-600 text-white text-xs px-2 py-1 rounded font-bold">خصم 50%</div>
                                 </div>
                                 <div class="flex justify-between items-end mt-4">
-                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">250</span> <span class="text-gray-900 font-bold">125.00 ر.س</span></p>
-                                    <p id="bulkOfferTotal" class="font-bold text-lg">الإجمالي: 250.00 ر.س</p>
+                                    <p class="text-xs text-gray-500">للقطعة الواحدة <span class="line-through">250</span> <span class="text-gray-900 font-bold">126.00 ر.س</span></p>
+                                    <p id="bulkOfferTotal" class="font-bold text-lg">الإجمالي: 252.00 ر.س</p>
                                 </div>
                             </div>
                         </div>
@@ -560,7 +560,7 @@
 
         let currentQuantity = 1;
         const pricePerUnit = 155;
-        const bulkPriceUnit = 125; // New unit price for 2+ items
+        const bulkPriceUnit = 126; // New unit price for 2+ items
 
         function updateQuantity(change) {
             currentQuantity += change;
@@ -668,8 +668,8 @@
                 document.getElementById('formQuantity').value = currentQuantity;
             }
 
-            // RE-CALCULATE PRICE based on the logic: if quantity > 1, all are 125
-            const finalPrice = currentQuantity >= 2 ? (currentQuantity * 125) : 155;
+            // RE-CALCULATE PRICE based on the logic: if quantity > 1, all are 126
+            const finalPrice = currentQuantity >= 2 ? (currentQuantity * 126) : 155;
             const finalOriginalPrice = currentQuantity * 250;
             
             // Update Totals everywhere
@@ -685,7 +685,7 @@
             // Update the bulk offer card total dynamically in the offer section
             const bulkOfferTotal = document.getElementById('bulkOfferTotal');
             if (bulkOfferTotal) {
-                const displayBulkTotal = (currentQuantity >= 2 ? (currentQuantity * 125) : 250).toFixed(2);
+                const displayBulkTotal = (currentQuantity >= 2 ? (currentQuantity * 126) : 252).toFixed(2);
                 bulkOfferTotal.innerText = 'الإجمالي: ' + displayBulkTotal + ' ر.س';
             }
             
